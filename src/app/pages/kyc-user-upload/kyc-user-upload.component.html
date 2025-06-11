@@ -12,15 +12,39 @@
       <input type="text" [(ngModel)]="form.rm" name="rm" required />
     </label>
 
-    <label>
-      Upload PAN Card:
-      <input type="file" (change)="onImageSelected($event)" accept="image/jpeg, image/jpg, image/png" required />
-    </label>
+    <div class="upload-wrapper">
+      <label class="file-label">
+        Upload Driving License Card:
+        <input type="file" (change)="onImageSelected($event)" accept="image/jpeg, image/jpg, image/png" required />
+      </label>
 
-    <label>
-      Upload Aadhaar Card:
-      <input type="file" (change)="onPdfSelected($event)" accept="application/pdf" required />
-    </label>
+      <!-- Loader Spinner -->
+      <mat-progress-spinner *ngIf="isDlUploading" diameter="24" mode="indeterminate" color="primary"
+        class="icon-spinner"></mat-progress-spinner>
+
+      <!-- View Icon -->
+      <mat-icon *ngIf="showDlViewIcon" class="icon-view" color="primary" (click)="fetchDLAndOpenFile()">
+        visibility
+      </mat-icon>
+
+    </div>
+
+    <div class="upload-wrapper">
+      <label class="file-label">
+        Upload Aadhaar Card:
+        <input type="file" (change)="onPdfSelected($event)" accept="application/pdf" required />
+      </label>
+
+      <!-- Loader Spinner -->
+      <mat-progress-spinner *ngIf="isAadharUploading" diameter="24" mode="indeterminate" color="primary"
+        class="icon-spinner"></mat-progress-spinner>
+
+      <!-- View Icon -->
+      <mat-icon *ngIf="showAadharViewIcon" class="icon-view" color="primary" (click)="fetchAadharOpenFile()">
+        visibility
+      </mat-icon>
+
+    </div>
 
     <label class="upload-label">
       Upload Video:

@@ -56,59 +56,78 @@ input[type="file"]:hover {
   background-color: #e0eaff;
 }
 
-/* button-with-image.component.css */
-button {
+.cancelBtn {
+  margin-left: 20px;
+}
+
+.upload-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  gap: 10px;
+}
+
+.file-label input[type="file"] {
+  margin-left: 8px;
+  width: 550px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 }
 
-button img {
-  vertical-align: middle;
+.view-icon:hover {
+  filter: brightness(0.8);
 }
 
-.upload-label {
+.upload-wrapper {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 500;
-  font-size: 16px;
+  margin-top: 16px;
 }
 
-.icon-style-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #1976d2;
-  color: white;
+.icon-spinner {
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  margin-left: -25px;
+}
+
+.icon-view {
   font-size: 20px;
-  border: none;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 5px;
+  margin-left: -25px;
 }
 
-.icon-style-btn:hover {
-  background-color: #125ea7;
-  transform: scale(1.05);
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.cancelBtn {
- margin-left: 10px;
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+  position: relative;
 }
 
-button {
-  padding: 0.6rem 1.2rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 30px;
   cursor: pointer;
-  display: inline-block;
 }
