@@ -536,7 +536,7 @@ export class KycAdminUploadComponent implements OnInit {
           .replace(/\bFalse\b/g, 'false'); // Python False to JS false
 
         // Parse to object
-        const result = JSON.parse(sanitized);
+        const result = sanitized.indexOf('Invalid image') == -1 ? JSON.parse(sanitized) : sanitized;
 
         // console.log('result);
         this.phoneUploadResponseData = result;
@@ -560,7 +560,7 @@ export class KycAdminUploadComponent implements OnInit {
           return;
         } else {
           this.isPassportPhotoSelected = false;
-
+          this.isphotoUploading = false;
           //this.passportPhotoMsg = 'Passport photo upload failed!';
           this.passportPhotoMsg = this.splitArray[0];
         }
