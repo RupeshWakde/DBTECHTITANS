@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatbotService {
-  private apiUrl = 'https://f8uqteji5h.execute-api.us-west-2.amazonaws.com/default/chatbotLambda3'; // Replace with your actual endpoint
+  private apiUrl = 'https://f8uqteji5h.execute-api.us-west-2.amazonaws.com/kycchat/chatbotLambda3'; // Replace with your actual endpoint
 
   constructor(private http: HttpClient) {}
 

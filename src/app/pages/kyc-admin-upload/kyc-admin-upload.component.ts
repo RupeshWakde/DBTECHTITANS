@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DataModalComponent } from '../model/data-modal.component';
+import { PhotoDataModalComponent } from '../model/photo-data-modal.component';
 
 @Component({
   selector: 'app-kyc-admin-upload',
@@ -50,6 +51,8 @@ export class KycAdminUploadComponent implements OnInit {
 
   isAadharUploading: boolean = false;
   showAadharViewIcon: boolean = false;
+
+  phoneUploadResponseData: any = null;
 
   userData: any = null;
   submitted: boolean = false;
@@ -110,7 +113,7 @@ export class KycAdminUploadComponent implements OnInit {
         'Content-Type': 'multipart/form-data',
       });
 
-       this.http
+      this.http
         .post(
           'https://4gv6vfzcq4.execute-api.us-west-2.amazonaws.com/uploadKYCFiles',
           formData
@@ -147,27 +150,37 @@ export class KycAdminUploadComponent implements OnInit {
   }
 
   fetchAndOpenFile(): void {
-    const payload = {
-      processing_method: 'DetectDocumentText', // or 'AnalyzeDocument' for forms
-      Records: [
-        {
-          s3: {
-            bucket: { name: 'dbdtcckyctextract' },
-            object: { key: this.photoFile?.name },
-          },
-        },
-      ],
-    };
+    console.log(' After click ');
+    console.log(this.phoneUploadResponseData);
 
-    this.http
-      .post(
-        'https://hx2lvepxw7.execute-api.us-west-2.amazonaws.com/textract-prod/extract-form',
-        payload
-      )
-      .subscribe({
-        next: (res) => console.log('Response:', res),
-        error: (err) => console.error('Error:', err),
-      });
+    // Convert to array format for table:
+
+    this.dialog.open(PhotoDataModalComponent, {
+      data: this.phoneUploadResponseData,
+      width: '600px',
+    });
+
+    // const payload = {
+    //   processing_method: 'DetectDocumentText', // or 'AnalyzeDocument' for forms
+    //   Records: [
+    //     {
+    //       s3: {
+    //         bucket: { name: 'dbdtcckyctextract' },
+    //         object: { key: this.photoFile?.name },
+    //       },
+    //     },
+    //   ],
+    // };
+
+    // this.http
+    //   .post(
+    //     'https://hx2lvepxw7.execute-api.us-west-2.amazonaws.com/textract-prod/extract-form',
+    //     payload
+    //   )
+    //   .subscribe({
+    //     next: (res) => console.log('Response:', res),
+    //     error: (err) => console.error('Error:', err),
+    //   });
   }
 
   fetchAadharOpenFile(): void {
@@ -461,7 +474,10 @@ export class KycAdminUploadComponent implements OnInit {
 
   onFileChange(event: any): void {
     console.log('validating file change');
+    this.isphotoUploading = true;
+    this.showPhotoViewIcon = false;
     const file = event.target.files[0];
+    this.photoFile = file;
     if (file) {
       console.log('file correct');
       const reader = new FileReader();
@@ -510,8 +526,27 @@ export class KycAdminUploadComponent implements OnInit {
         // Replace single quotes around keys
         //let      jsonstr = response.body.replace(/'([^']+)':/g, '$1:');
         //  console.log('##################### Response Body:', response.body);
+
+        this.phoneUploadResponseData = response.body;
+
+        // Convert Python-style booleans and single quotes to JS-style
+        const sanitized = this.phoneUploadResponseData
+          .replace(/'/g, '"') // single to double quotes
+          .replace(/\bTrue\b/g, 'true') // Python True to JS true
+          .replace(/\bFalse\b/g, 'false'); // Python False to JS false
+
+        // Parse to object
+        const result = JSON.parse(sanitized);
+
+        // console.log('result);
+        this.phoneUploadResponseData = result;
+
+        // this.phoneUploadResponseData = "{'FaceDetected': 'True', 'Sharpness': '89.85481262207031', 'Brightness': '92.2479019165039', 'IsBlurry': 'False', 'IsTooDarkOrBright': 'False'}";
+
         this.splitArray = response.body.split(',');
         let factDetectedArr = this.splitArray[0].split(':');
+
+        console.log(this.splitArray);
         // console.log('Split Array:', this.splitArray[0]);
         //    console.log('Split Array:', this.splitArray[1]);
         if (
@@ -519,10 +554,13 @@ export class KycAdminUploadComponent implements OnInit {
           factDetectedArr[1].includes('True')
         ) {
           this.isPassportPhotoSelected = true;
+          this.isphotoUploading = false;
+          this.showPhotoViewIcon = true;
           this.passportPhotoMsg = 'Passport photo uploaded successfully!';
           return;
         } else {
           this.isPassportPhotoSelected = false;
+
           //this.passportPhotoMsg = 'Passport photo upload failed!';
           this.passportPhotoMsg = this.splitArray[0];
         }
