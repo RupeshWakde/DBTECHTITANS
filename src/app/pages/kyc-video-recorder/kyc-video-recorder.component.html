@@ -1,0 +1,8 @@
+<div class="video-container">
+  <video #video autoplay playsinline width="400" height="300"></video>
+  <br />
+  <button (click)="capture()">Capture Image</button>
+  <button *ngIf="capturedImage" (click)="downloadImage()">Download Image</button>
+  <br />
+  <img [src]="capturedImage" *ngIf="capturedImage" alt="Snapshot" width="400" />
+</div>

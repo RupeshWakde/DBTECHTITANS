@@ -1,0 +1,32 @@
+<div class="kyc-details">
+  <h2>KYC Details - {{ user?.name }}</h2>
+
+  <table class="kyc-table">
+    <tr>
+      <th>Name:</th>
+      <td>{{ user?.name }}</td>
+    </tr>
+    <tr>
+      <th>Date of Birth:</th>
+      <td>{{ user?.dob }}</td>
+    </tr>
+    <tr>
+      <th>PAN:</th>
+      <td>{{ user?.pan }}</td>
+    </tr>
+    <tr>
+      <th>Aadhaar:</th>
+      <td>{{ user?.aadhaar }}</td>
+    </tr>
+    <tr>
+      <th>Status:</th>
+      <td>{{ user?.status }}</td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <button (click)="goToAudioRecorder()">Record Audio</button>
+    <button class="approve" (click)="updateStatus('Approved')">Approve</button>
+    <button class="reject" (click)="updateStatus('Rejected')">Reject</button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="upload-container">
+  <h2>Upload KYC Documents</h2>
+
+  <form (ngSubmit)="submit()" #kycForm="ngForm">
+    <label>
+      Name:
+      <input type="text" [(ngModel)]="form.name" name="name" required />
+    </label>
+
+    <label>
+      Relationship Manager:
+      <input type="text" [(ngModel)]="form.rm" name="rm" required />
+    </label>
+
+    <label>
+      Upload PAN Card:
+      <input type="file" (change)="onImageSelected($event)" accept="image/jpeg, image/jpg, image/png" required />
+    </label>
+
+    <label>
+      Upload Aadhaar Card:
+      <input type="file" (change)="onPdfSelected($event)" accept="application/pdf" required />
+    </label>
+
+    <label class="upload-label">
+      Upload Video:
+      <button type="button" class="upload-btn" (click)="uploadVideo()">🎥</button>
+
+    </label>
+
+
+
+
+    <button type="submit" [disabled]="!isFormValid()">Submit KYC</button>
+    <button type="button" (click)="btnCancel()"  class="cancelBtn">Cancel</button>
+  </form>
+
+
+</div>

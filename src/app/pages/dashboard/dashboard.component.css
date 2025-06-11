@@ -1,0 +1,41 @@
+.dashboard-container {
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background-color: #f5f5f5;
+  }
+
+  .active {
+    color: green;
+    font-weight: bold;
+  }
+
+  .inactive {
+    color: red;
+    font-weight: bold;
+  }

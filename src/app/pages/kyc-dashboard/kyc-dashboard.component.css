@@ -1,0 +1,134 @@
+.kyc-dashboard {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar {
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.filter-bar input {
+  padding: 0.5rem;
+  width: 250px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f8f8;
+}
+
+.approved {
+  color: green;
+  font-weight: bold;
+}
+
+.pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.rejected {
+  color: red;
+  font-weight: bold;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+  margin-top: 1rem;
+  padding: 10px 16px;
+  background: #dc3545;
+}
+
+.close-btn:hover {
+  background: #c82333;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.view {
+  background-color: #007bff;
+  color: white;
+}
+
+.retry {
+  background-color: #ffc107;
+  color: black;
+}

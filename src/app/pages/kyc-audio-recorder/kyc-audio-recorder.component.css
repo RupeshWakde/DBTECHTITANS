@@ -1,0 +1,32 @@
+.audio-recorder {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.controls button {
+  margin: 1rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.controls button:first-child {
+  background-color: green;
+}
+
+.controls button:last-child {
+  background-color: red;
+}
+
+.audio-preview {
+  margin-top: 2rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}

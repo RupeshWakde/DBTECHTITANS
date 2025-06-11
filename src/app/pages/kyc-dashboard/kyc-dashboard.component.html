@@ -1,0 +1,88 @@
+<div class="kyc-dashboard">
+  <h2>KYC Dashboard</h2>
+
+  <div class="filter-bar">
+    <input type="text" [(ngModel)]="filterText" placeholder="Search by name or status..." />
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Customer Name</th>
+          <th>Relation Manager</th>
+          <th>Document Type</th>
+          <th>Status</th>
+          <th>Uploaded On</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredList(); let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.rm }}</td>
+          <td>{{ user.document }}</td>
+          <td [ngClass]="{
+              approved: user.status === 'Approved',
+              pending: user.status === 'Pending',
+              rejected: user.status === 'Rejected'
+            }">
+            {{ user.status }}
+          </td>
+          <td>{{ user.date }}</td>
+          <td>
+            <div *ngIf="user.status === 'Pending'">
+              <!-- Start Button -->
+              <button class="button start" (click)="startKyc(user)">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+
+              </button>
+
+            </div>
+            <div *ngIf="user.status === 'Approved'">
+
+              <!-- View Button -->
+              <button class="button view" (click)="view(user)">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+
+            </div>
+            <div *ngIf="user.status === 'Rejected'">
+              <!-- Retry Button -->
+              <button class="button retry" (click)="retryKyc(user)">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="1 4 1 10 7 10" />
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredList().length === 0">
+          <td colspan="6" style="text-align:center;">No records found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" *ngIf="selectedUser">
+    <div class="modal">
+      <h3>KYC Details</h3>
+      <p><strong>Name:</strong> {{ selectedUser.name }}</p>
+      <p><strong>Relationship Manager:</strong> {{ selectedUser.rm }}</p>
+      <p><strong>Document:</strong> {{ selectedUser.document }}</p>
+      <p><strong>Status:</strong> {{ selectedUser.status }}</p>
+      <p><strong>Date:</strong> {{ selectedUser.date }}</p>
+      <button class="close-btn" (click)="close()">Close</button>
+    </div>
+  </div>
+
+</div>

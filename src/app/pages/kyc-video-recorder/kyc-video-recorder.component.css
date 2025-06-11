@@ -1,0 +1,23 @@
+video {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+button,
+a {
+  width: fit-content;
+  padding: 8px 12px;
+}
+
+ .video-container {
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }

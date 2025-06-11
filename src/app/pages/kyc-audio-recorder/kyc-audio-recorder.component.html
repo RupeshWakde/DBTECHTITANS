@@ -1,0 +1,15 @@
+<div class="audio-recorder">
+  <h2>KYC Audio Recorder</h2>
+
+  <div class="controls">
+    <button (click)="startRecording()" [disabled]="isRecording">Start Recording</button>
+    <button (click)="stopRecording()" [disabled]="!isRecording">Stop Recording</button>
+  </div>
+
+  <div *ngIf="audioURL" class="audio-preview">
+    <h3>Playback:</h3>
+    <audio [src]="audioURL" controls></audio>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+</div>

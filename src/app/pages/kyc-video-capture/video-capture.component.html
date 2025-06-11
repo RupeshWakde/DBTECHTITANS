@@ -1,0 +1,9 @@
+<div class="container">
+  <video #videoElement autoplay muted class="video-preview"></video>
+
+  <div class="button-group">
+    <button (click)="startRecording()" [disabled]="isRecording">🎥 Start</button>
+    <button (click)="stopRecording()" [disabled]="!isRecording">🛑 Stop</button>
+    <button (click)="uploadVideo()" [disabled]="!isVideoReady">⬆️ Upload</button>
+  </div>
+</div>
