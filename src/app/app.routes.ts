@@ -8,6 +8,7 @@ import { KycVideoRecorderComponent } from './pages/kyc-video-recorder/kyc-video-
 import { KycUserUploadComponent } from './pages/kyc-user-upload/kyc-user-upload.component';
 import { KycAdminUploadComponent } from './pages/kyc-admin-upload/kyc-admin-upload.component';
 import { VideoCaptureComponent } from './pages/kyc-video-capture/video-capture.component';
+import { KycSuccessComponent } from './pages/kyc-success.component/kyc-success.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,4 +21,5 @@ export const routes: Routes = [
   { path: 'kyc-details/:id', component: KycDetailsComponent },
   { path: 'kyc-video', component: KycVideoRecorderComponent },
   { path: 'kyc-video-capture', component: VideoCaptureComponent },
+  { path: 'kyc-success', component: KycSuccessComponent },
 ];

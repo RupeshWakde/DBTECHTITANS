@@ -578,4 +578,8 @@ export class KycAdminUploadComponent implements OnInit {
       }
     }
   }
+
+  fnSubmitKYC() {
+     this.router.navigate(['/kyc-success']);
+  }
 }
