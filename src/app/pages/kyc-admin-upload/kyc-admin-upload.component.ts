@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { DataModalComponent } from '../model/data-modal.component';
 import { PhotoDataModalComponent } from '../model/photo-data-modal.component';
+import { audioSampleData } from '../../../assets/data/sample';
 
 @Component({
   selector: 'app-kyc-admin-upload',
@@ -47,7 +48,7 @@ export class KycAdminUploadComponent implements OnInit {
   showDlViewIcon: boolean = false;
 
   isAudiolUploading: boolean = false;
-  showAudioViewIcon: boolean = false;
+  showAudioViewIcon: boolean = true;
 
   isAadharUploading: boolean = false;
   showAadharViewIcon: boolean = false;
@@ -107,7 +108,7 @@ export class KycAdminUploadComponent implements OnInit {
       if (this.imageFile) formData.append('audio', this.audioFile);
 
       // if (this.videoFile) formData.append('video', this.videoFile);
-      //formData.append('name', this.userData.name);
+      formData.append('audio', this.audioFile);
       //formData.append('rm', this.userData.rm);
       const headers = new HttpHeaders({
         'Content-Type': 'multipart/form-data',
@@ -115,7 +116,7 @@ export class KycAdminUploadComponent implements OnInit {
 
       this.http
         .post(
-          'https://4gv6vfzcq4.execute-api.us-west-2.amazonaws.com/uploadKYCFiles',
+          'https://8g9i5dxsl7.execute-api.us-west-2.amazonaws.com/default/uploadAudioFiles',
           formData
         )
         .subscribe({
@@ -244,6 +245,23 @@ export class KycAdminUploadComponent implements OnInit {
   }
 
   fetchAudioOpenFile(): void {
+    console.log(audioSampleData.body.results.transcripts);
+    const transscriptData = audioSampleData?.body?.results?.transcripts?.[0];
+    const noTranscriptMessage = '⚠️ No transcript available.';
+
+    if (transscriptData?.transcript?.trim()) {
+       this.dialog.open(DataModalComponent, {
+        data: transscriptData,
+        width: '600px',
+      });
+    } else {
+      this.dialog.open(DataModalComponent, {
+        data: { noTranscriptMessage },
+        width: '600px',
+      });
+    }
+
+    /*
     const payload = {
       processing_method: 'DetectDocumentText', // or 'AnalyzeDocument' for forms
       Records: [
@@ -301,6 +319,7 @@ export class KycAdminUploadComponent implements OnInit {
         },
         error: (err) => console.error('Error:', err),
       });
+      */
   }
 
   fetchDLAndOpenFile(): void {
@@ -536,7 +555,10 @@ export class KycAdminUploadComponent implements OnInit {
           .replace(/\bFalse\b/g, 'false'); // Python False to JS false
 
         // Parse to object
-        const result = sanitized.indexOf('Invalid image') == -1 ? JSON.parse(sanitized) : sanitized;
+        const result =
+          sanitized.indexOf('Invalid image') == -1
+            ? JSON.parse(sanitized)
+            : sanitized;
 
         // console.log('result);
         this.phoneUploadResponseData = result;
@@ -580,6 +602,6 @@ export class KycAdminUploadComponent implements OnInit {
   }
 
   fnSubmitKYC() {
-     this.router.navigate(['/kyc-success']);
+    this.router.navigate(['/kyc-success']);
   }
 }
