@@ -9,7 +9,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { DataModalComponent } from '../model/data-modal.component';
 import { PhotoDataModalComponent } from '../model/photo-data-modal.component';
-import { audioSampleData } from '../../../assets/data/sample';
 
 @Component({
   selector: 'app-kyc-admin-upload',
@@ -48,7 +47,7 @@ export class KycAdminUploadComponent implements OnInit {
   showDlViewIcon: boolean = false;
 
   isAudiolUploading: boolean = false;
-  showAudioViewIcon: boolean = true;
+  showAudioViewIcon: boolean = false;
 
   isAadharUploading: boolean = false;
   showAadharViewIcon: boolean = false;
@@ -245,81 +244,48 @@ export class KycAdminUploadComponent implements OnInit {
   }
 
   fetchAudioOpenFile(): void {
-    console.log(audioSampleData.body.results.transcripts);
-    const transscriptData = audioSampleData?.body?.results?.transcripts?.[0];
-    const noTranscriptMessage = '⚠️ No transcript available.';
+    // console.log(audioSampleData.body.results.transcripts);
 
-    if (transscriptData?.transcript?.trim()) {
-       this.dialog.open(DataModalComponent, {
-        data: transscriptData,
-        width: '600px',
-      });
-    } else {
-      this.dialog.open(DataModalComponent, {
-        data: { noTranscriptMessage },
-        width: '600px',
-      });
-    }
-
-    /*
     const payload = {
       processing_method: 'DetectDocumentText', // or 'AnalyzeDocument' for forms
       Records: [
         {
           s3: {
             bucket: { name: 'dbdtcckyctextract' },
-            object: { key: this.pdfFile?.name },
+            object: { key: this.audioFile?.name },
           },
         },
       ],
     };
 
     this.http
-      .post(
-        'https://hx2lvepxw7.execute-api.us-west-2.amazonaws.com/textract-prod/extract-form',
-        payload
+      .get(
+        'https://1r9wm6v7mf.execute-api.us-west-2.amazonaws.com/audiototxt4/audioToTxt2?audio=' +
+          this.audioFile?.name
       )
       .subscribe({
         next: (res) => {
+          console.log(typeof res);
           console.log(res);
+          const audionJSon = JSON.parse(res as string);
+          console.log(audionJSon);
 
-          // const parsedBody = JSON.parse(res.body);
-
-          // Convert to array format for table:
-          const tableData = Object.entries(res).map(([key, value]) => ({
-            key,
-            value,
-          }));
-
-          // console.log(tableData);
-
-          let diplayData;
-          for (const [key, value] of Object.entries(res)) {
-            if (key == 'body') {
-              // console.log('Key:', key, 'Value:', value);
-              diplayData = JSON.parse(value);
-            }
+          const transscriptData = audionJSon?.results?.transcripts?.[0];
+          const noTranscriptMessage = 'No transcript available.';
+          if (transscriptData?.transcript?.trim()) {
+            this.dialog.open(DataModalComponent, {
+              data: transscriptData,
+              width: '600px',
+            });
+          } else {
+            this.dialog.open(DataModalComponent, {
+              data: { noTranscriptMessage },
+              width: '600px',
+            });
           }
-
-          for (const [key, value] of Object.entries(diplayData)) {
-            // if(key == 'body') {
-            console.log(value);
-            //   diplayData =value;
-            // }
-          }
-
-          // console.log(diplayData)
-          console.log(' Coming start ');
-
-          this.dialog.open(DataModalComponent, {
-            data: diplayData,
-            width: '600px',
-          });
-          console.log(' Coming end ');
         },
         error: (err) => console.error('Error:', err),
       });
-      */
   }
 
   fetchDLAndOpenFile(): void {
