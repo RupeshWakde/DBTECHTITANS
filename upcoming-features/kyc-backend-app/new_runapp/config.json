@@ -1,0 +1,60 @@
+{
+    "default_settings": {
+        "host": "0.0.0.0",
+        "port": 8000,
+        "workers": 1,
+        "dev_mode": false,
+        "health_check": false,
+        "log_level": "info",
+        "access_log": true
+    },
+    "environments": {
+        "development": {
+            "host": "127.0.0.1",
+            "port": 8080,
+            "workers": 1,
+            "dev_mode": true,
+            "health_check": true,
+            "log_level": "debug",
+            "access_log": true
+        },
+        "production": {
+            "host": "0.0.0.0",
+            "port": 8000,
+            "workers": 4,
+            "dev_mode": false,
+            "health_check": false,
+            "log_level": "info",
+            "access_log": true
+        },
+        "testing": {
+            "host": "127.0.0.1",
+            "port": 8001,
+            "workers": 1,
+            "dev_mode": true,
+            "health_check": true,
+            "log_level": "debug",
+            "access_log": false
+        }
+    },
+    "features": {
+        "auto_reload": true,
+        "graceful_shutdown": true,
+        "dependency_check": true,
+        "database_init": true,
+        "storage_test": true,
+        "signal_handling": true
+    },
+    "logging": {
+        "use_emojis": true,
+        "show_timestamps": true,
+        "color_output": true,
+        "log_file": null
+    },
+    "security": {
+        "allowed_hosts": ["*"],
+        "cors_origins": ["*"],
+        "max_file_size": "50MB",
+        "allowed_extensions": [".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx"]
+    }
+} 
