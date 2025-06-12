@@ -1,12 +1,41 @@
+.login-main-container {
+  display: flex;
+  flex-direction: row; /* side-by-side layout */
+
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+
 .login-container {
-  max-width: 400px;
+  flex: 1;
   margin: 100px auto;
+   max-width: 600px;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px #ccc;
   background: white;
   font-family: Arial, sans-serif;
 }
+
+login-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 
 h2 {
   text-align: center;
@@ -49,3 +78,4 @@ button:disabled {
   background: #aaa;
   cursor: not-allowed;
 }
+

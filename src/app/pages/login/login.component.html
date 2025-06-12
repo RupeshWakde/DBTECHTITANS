@@ -1,13 +1,22 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onLogin()">
-    <div class="form-group">
-      <input [(ngModel)]="username" name="username" placeholder="Username" required />
-    </div>
-    <div class="form-group">
-      <input [(ngModel)]="password" name="password" placeholder="Password" type="password" required />
-    </div>
-    <button type="submit">Login</button>
-  </form>
-  <p *ngIf="loginFailed" style="color: red;">Invalid credentials</p>
+<div class="login-main-container">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <input [(ngModel)]="username" name="username" placeholder="Username" required />
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="password" name="password" placeholder="Password" type="password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <p *ngIf="loginFailed" style="color: red;">Invalid credentials</p>
+  </div>
+  <!-- Right KYC Image Panel -->
+  <div class="login-image">
+
+    <img src="assets/icons/kyc2.png" alt="PAN" />
+    <!-- <img src="assets/icons/kyc1.png" alt="Aadhaar" />
+    <img src="assets/icons/kyc3.png" alt="Photo" /> -->
+  </div>
 </div>
